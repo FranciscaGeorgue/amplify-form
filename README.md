@@ -1,2 +1,2 @@
 # amplify-form
-Formulario Login deployado en AWS Amplify
+Formulario de busqueda deployado en AWS Amplify
