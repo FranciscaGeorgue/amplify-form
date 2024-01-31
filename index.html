@@ -3,45 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web de Parámetros</title>
   <style>
     body {
+      background-color: #fff; /* Fondo blanco */
       font-family: Arial, sans-serif;
-      margin: 20px;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333; /* Color del texto */
+    }
+
+    h2 {
+        text-align: left;
+        margin-top: 5%;
+        margin-left: 2%;
+    }
+
+    button {
+      background-color: #007BFF; /* Color del botón */
+      color: #fff; /* Color del texto del botón */
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    label {
+      display: inline-block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input {
+      margin: 5px 0; /* Espacio vertical entre los inputs */
+      padding: 10px;
+      width: 100%; /* Ocupar todo el ancho disponible */
+      box-sizing: border-box; /* Incluir el padding en el ancho total */
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .column {
+      width: calc(50% - 10px); /* 50% del ancho total, restando el margen entre columnas */
+      margin-bottom: 20px;
+      box-sizing: border-box; /* Incluir el padding en el ancho total */
+    }
+
+    .nested-column-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .nested-column {
+      flex: 1;
+      margin-right: 10px; /* Margen derecho para separar las nested-columns */
+      margin-bottom: 10px; /* Margen inferior entre nested-columns */
+      box-sizing: border-box; /* Incluir el padding en el ancho total */
+      text-align: left;
     }
   </style>
-  <title>Consulta de API con Botón de Envío</title>
 </head>
 <body>
-  <form id="myForm">
-    <label for="apiEndpoint">URL de la API:</label>
-    <input type="text" id="apiEndpoint" name="apiEndpoint" placeholder="Ingrese la URL de la API" required>
-    <button type="submit">Consultar API</button>
-  </form>
+  <h1>Web de Parámetros</h1>
 
-  <div id="apiResponse"></div>
+  <div class="row">
+    <div id="configuracionActual">
+      <label for="configuracionActual">Configuración actual</label>
+      <button id="editarBtn">Editar</button>
+    </div>
+  </div>
+
+  <div class="row" style="width: 50%;">
+    <label for="kts">KTS:</label>
+    <input type="text" id="kts" name="kts" placeholder="33">
+  </div>
+  <div class="row" style="width: 50%;">
+    <label for="max-grabaciones-diario">Máximo de grabaciones diario:</label>
+    <input type="text" id="max-grabaciones-diario" name="max-grabaciones-diario" placeholder="8000">
+  </div>
+
+  <div class="row" style="margin-top: 2%;">
+    <div class="column" style="border: 1px solid #ddd;">
+      <h2>Inbound</h2>
+      <!-- Contenido de la primera columna -->
+      <div class="nested-column-container">
+        <div class="nested-column">
+          <label for="inboundButton" style="margin-left: 7%;">Agregar colas</label><br>
+          <button id="inboundButton" style="margin-left: 7%;">Agregar colas</button>
+        </div>
+        <div class="nested-column">
+          <h4>Intervalo Horario</h4>
+          <label for="desde-inbound">Desde</label>
+          <input type="text" id="desde-inbound" name="desde-inbound" placeholder="00:00">
+          <label for="hasta-inbound">Hasta</label>
+          <input type="text" id="hasta-inbound" name="hasta-inbound" placeholder="23:59">
+        </div>
+        <div class="nested-column">
+          <label for="duracion-min-inbound">Duración mínima</label>
+          <input type="text" id="duracion-min-inbound" name="duracion-min-inbound" placeholder="30">
+        </div>
+      </div>
+    </div>
+    <div class="column" style="border: 1px solid #ddd;">
+      <h2>Outbound</h2>
+      <!-- Contenido de la segunda columna -->
+      <div class="nested-column-container">
+        <div class="nested-column">
+          <label for="inboundButton" style="margin-left: 7%;">Agregar campañas</label><br>
+          <button id="inboundButton" style="margin-left: 7%;">Agregar campañas</button>
+        </div>
+        <div class="nested-column">
+          <h4>Intervalo Horario</h4>
+          <label for="desde-outbound">Desde</label>
+          <input type="text" id="desde-outbound" name="desde-outbound" placeholder="00:00">
+          <label for="hasta-outbound">Hasta</label>
+          <input type="text" id="hasta-outbound" name="hasta-outbound" placeholder="23:59">
+        </div>
+        <div class="nested-column">
+          <label for="duracion-minima-outbound">Duración mínima</label>
+          <input type="text" id="duracion-minima-outbound" name="duracion-minima-outbound" placeholder="20">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 2%;">
+    <div class="column">
+      <h2>Resumen</h2>
+      <div class="nested-column-container">
+        <div class="nested-column">
+          <label for="inboundButton" style="margin-left: 2%;">Asignar cantidades</label><br>
+          <button id="inboundButton" style="margin-left: 2%;">Asignar</button>
+        </div>
+        
+      </div>
+    </div>
+    <div class="column">
+      <h2></h2>
+      <div class="nested-column-container">
+        <div class="nested-column">
+          <label for="input1">Inbound</label>
+        </div>
+        <div class="nested-column">
+          <label for="input2">Outbound</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Puedes agregar más contenido según tus necesidades -->
 
   <script>
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Evitar el envío tradicional del formulario
-
-      // Obtener la URL de la API desde el campo de entrada
-      const apiEndpoint = document.getElementById('apiEndpoint').value;
-
-      // Realizar la consulta a la API
-      fetch(apiEndpoint)
-        .then(response => response.json())
-        .then(data => {
-          // Manejar la respuesta de la API
-          const apiResponseElement = document.getElementById('apiResponse');
-          apiResponseElement.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
-        })
-        .catch(error => {
-          // Manejar errores de la consulta
-          console.error('Error al consultar la API:', error);
-          const apiResponseElement = document.getElementById('apiResponse');
-          apiResponseElement.innerHTML = '<p style="color: red;">Error al consultar la API</p>';
-        });
-    });
+    // Puedes agregar scripts JavaScript aquí si es necesario
   </script>
 </body>
 </html>
