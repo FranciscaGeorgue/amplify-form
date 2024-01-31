@@ -159,10 +159,42 @@
     </div>
   </div>
 
+  <div class="row" style="text-align: left;">
+    <form id="myForm">
+      <label for="apiEndpoint">URL de la API:</label>
+      <input type="text" id="apiEndpoint" name="apiEndpoint" placeholder="Ingrese la URL de la API" required>
+      <button type="submit">Consultar API</button>
+    </form>
+  
+  </div>
+  <div class="row" style="text-align: left;">
+    <div id="apiResponse"></div>
+  </div>
+
   <!-- Puedes agregar más contenido según tus necesidades -->
 
   <script>
-    // Puedes agregar scripts JavaScript aquí si es necesario
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Evitar el envío tradicional del formulario
+
+      // Obtener la URL de la API desde el campo de entrada
+      const apiEndpoint = document.getElementById('apiEndpoint').value;
+
+      // Realizar la consulta a la API
+      fetch(apiEndpoint)
+        .then(response => response.json())
+        .then(data => {
+          // Manejar la respuesta de la API
+          const apiResponseElement = document.getElementById('apiResponse');
+          apiResponseElement.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+        })
+        .catch(error => {
+          // Manejar errores de la consulta
+          console.error('Error al consultar la API:', error);
+          const apiResponseElement = document.getElementById('apiResponse');
+          apiResponseElement.innerHTML = '<p style="color: red;">Error al consultar la API</p>';
+        });
+    });
   </script>
 </body>
 </html>
